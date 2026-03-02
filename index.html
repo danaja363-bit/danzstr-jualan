@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DANZZSTR - Official Store</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        .logo span {
+            color: #ff3e3e;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #ff3e3e;
+        }
+        
+        .cart {
+            background-color: #ff3e3e;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);
+            color: white;
+            padding: 3rem 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .hero-text h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn {
+            background-color: #ff3e3e;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #cc2e2e;
+            transform: scale(1.05);
+        }
+        
+        .hero-image {
+            font-size: 5rem;
+            filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+        }
+        
+        /* Products Section */
+        .products {
+            padding: 3rem 5%;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #ff3e3e;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #ff3e3e;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .product-img {
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-category {
+            color: #ff3e3e;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .product-price span {
+            font-size: 0.9rem;
+            color: #888;
+            text-decoration: line-through;
+            margin-left: 0.5rem;
+            font-weight: normal;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #ff3e3e;
+        }
+        
+        /* Categories */
+        .categories {
+            padding: 3rem 5%;
+            background-color: white;
+        }
+        
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .cat-card {
+            background: #f5f5f5;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .cat-card:hover {
+            background: #ff3e3e;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .cat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 3rem 5% 1rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ff3e3e;
+        }
+        
+        .footer-section p, .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            line-height: 1.8;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid #333;
+            color: #888;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .hero {
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">DANZZ<span>STR</span></div>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Products</a>
+            <a href="#">Categories</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="cart">🛒 Cart (0)</div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Streetwear <br>Untuk Anak Muda<span style="color: #ff3e3e;">.</span></h1>
+            <p>Dapatkan koleksi limited edition dengan harga spesial! <br>Sale up to 50% + free shipping.</p>
+            <button class="btn">SHOP NOW 🔥</button>
+        </div>
+        <div class="hero-image">
+            👕👟🧢
+        </div>
+    </section>
+    
+    <!-- Categories -->
+    <section class="categories">
+        <h2 class="section-title">Kategori Produk</h2>
+        <div class="cat-grid">
+            <div class="cat-card">
+                <div class="cat-icon">👕</div>
+                <h3>Kaos</h3>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">👖</div>
+                <h3>Celana</h3>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">👟</div>
+                <h3>Sepatu</h3>
+            </div>
+            <div class="cat-card">
+                <div class="cat-icon">🧢</div>
+                <h3>Aksesoris</h3>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Products -->
+    <section class="products">
+        <h2 class="section-title">Produk Terlaris</h2>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="badge">HOT SALE!</div>
+                <div class="product-img">👕🔥</div>
+                <div class="product-info">
+                    <div class="product-category">Kaos</div>
+                    <div class="product-title">Oversized Tee Black</div>
+                    <div class="product-price">Rp 149.000 <span>Rp 299.000</span></div>
+                    <button class="add-to-cart">Tambah ke Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-img">👟</div>
+                <div class="product-info">
+                    <div class="product-category">Sepatu</div>
+                    <div class="product-title">Sneakers White</div>
+                    <div class="product-price">Rp 399.000</div>
+                    <button class="add-to-cart">Tambah ke Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="badge">NEW!</div>
+                <div class="product-img">🧢</div>
+                <div class="product-info">
+                    <div class="product-category">Aksesoris</div>
+                    <div class="product-title">Trucker Cap</div>
+                    <div class="product-price">Rp 89.000</div>
+                    <button class="add-to-cart">Tambah ke Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-img">👖</div>
+                <div class="product-info">
+                    <div class="product-category">Celana</div>
+                    <div class="product-title">Cargo Pants</div>
+                    <div class="product-price">Rp 249.000</div>
+                    <button class="add-to-cart">Tambah ke Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="badge">BESTSELLER</div>
+                <div class="product-img">👕</div>
+                <div class="product-info">
+                    <div class="product-category">Kaos</div>
+                    <div class="product-title">Graphic Tee White</div>
+                    <div class="product-price">Rp 179.000</div>
+                    <button class="add-to-cart">Tambah ke Cart</button>
+                </div>
+            </div>
+            
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="product-img">🧦</div>
+                <div class="product-info">
+                    <div class="product-category">Aksesoris</div>
+                    <div class="product-title">Socks Set</div>
+                    <div class="product-price">Rp 59.000</div>
+                    <button class="add-to-cart">Tambah ke Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>DANZZSTR</h3>
+                <p>Streetwear brand untuk anak muda indonesia. #StayStylish</p>
+            </div>
+            <div class="footer-section">
+                <h3>Links</h3>
+                <p><a href="#">About Us</a></p>
+                <p><a href="#">Contact</a></p>
+                <p><a href="#">FAQ</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📞 0812-3456-7890</p>
+                <p>📧 danzzstr@store.com</p>
+                <p>📍 Jakarta, Indonesia</p>
+            </div>
+        </div>
+        <div class="copyright">
+            © 2024 DANZZSTR. All rights reserved. Tugas Sekolah by King Darknet 😈
+        </div>
+    </footer>
+    
+    <script>
+        // Simple cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                let cart = document.querySelector('.cart');
+                let currentText = cart.textContent;
+                let match = currentText.match(/\((\d+)\)/);
+                let count = match ? parseInt(match[1]) : 0;
+                count++;
+                cart.textContent = `🛒 Cart (${count})`;
+                alert('Barang masuk keranjang! 😋');
+            });
+        });
+    </script>
+</body>
+</html>
